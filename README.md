@@ -26,16 +26,9 @@ Ouvrir `index.html` dans un navigateur : aucune installation n'est nécessaire.
 
 Chaque faction a deux paquets d'événements. Le paquet A est utilisé dès le début de la partie. Les cartes B sont mélangées dans les paquets quand la carte Troubles « Sweden Enters the War » est tirée. On les reconnaît au petit losange « B » imprimé en bas à droite. La carte n° 1 de chaque faction (Treaty of Westphalia) est classée à part, dans « Westphalie ».
 
-Dans le module VASSAL, chaque carte est rattachée au paquet A ou B par un prototype (`def_Card_Sweden_A`, `def_Card_France_B`…). Ce rattachement ne correspond pas toujours à ce qui est imprimé sur les cartes :
+Les paquets B sont donc : cartes 20 à 27 pour les Impériaux et la Ligue catholique, cartes 19 à 27 pour la France et la Suède. France et Suède ont ainsi 9 cartes B chacune, contre 8 pour les Impériaux et 7 pour la Ligue (à cause de la carte n° 25 manquante). La galerie suit ce classement.
 
-| Faction | Paquet B selon le module | Losange B imprimé sur |
-|---|---|---|
-| Impériaux | 20 à 27 | 20 à 27 |
-| Ligue catholique | 20 à 27 | 20 à 27 |
-| France | 20 à 27 | **19** à 27 |
-| Suède | 20 à 27 | **19** à 27 |
-
-Les cartes France n° 19 (*Annus Horribilis*) et Suède n° 19 (*Swedish Training*) portent le losange B, alors que le module les place dans le paquet A. La galerie suit ce qui est imprimé sur les cartes. Elle classe donc ces deux cartes en B. France et Suède ont ainsi 9 cartes B chacune, contre 8 pour les Impériaux et 7 pour la Ligue (à cause de la carte n° 25 manquante).
+Le module VASSAL place correctement France n° 19 (*Annus Horribilis*) et Suède n° 19 (*Swedish Training*) dans les paquets B. Seule une étiquette interne de ces deux cartes indique encore « A » (prototype `def_Card_France_A` / `def_Card_Sweden_A`, propriété `Home_Deck`). Elle n'a aucun effet en jeu : les prototypes A et B font la même chose (défausser la carte).
 
 ## Régénérer la page
 
