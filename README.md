@@ -1,6 +1,6 @@
 # Thirty Years of Misery – galerie des cartes
 
-Galerie web des 125 cartes du jeu *Thirty Years of Misery* (Brian Asklev, © 2026 VUCA Games, LLC), extraites du module VASSAL `Thirty Years of Misery V1.vmod` (module VASSAL de Kevin Conway).
+Galerie web des 126 cartes du jeu *Thirty Years of Misery* (Brian Asklev, © 2026 VUCA Games, LLC), extraites du module VASSAL `Thirty Years of Misery V1.vmod` (module VASSAL de Kevin Conway).
 
 Ouvrir `index.html` dans un navigateur : aucune installation n'est nécessaire.
 
@@ -17,18 +17,31 @@ Ouvrir `index.html` dans un navigateur : aucune installation n'est nécessaire.
 | Paquet | Cartes |
 |---|---|
 | Impériaux | 27 |
-| Ligue catholique | 26 (la n° 25 n'existe pas dans le module) |
+| Ligue catholique | 27 (la n° 25 est reconstituée, voir plus bas) |
 | France | 27 |
 | Suède | 27 |
 | Troubles allemands (A à D) | 18 |
 
 ## Paquets A et B
 
-Chaque faction a deux paquets d'événements. Le paquet A est utilisé dès le début de la partie. Les cartes B sont mélangées dans les paquets quand la carte Troubles « Sweden Enters the War » est tirée. On les reconnaît au petit losange « B » imprimé en bas à droite. La carte n° 1 de chaque faction (Treaty of Westphalia) est classée à part, dans « Westphalie ».
+Chaque faction a deux paquets d'événements. Le paquet A est utilisé dès le début de la partie. Les cartes B sont mélangées dans les paquets quand la carte Troubles « Sweden Enters the War » est tirée. La plupart portent un petit losange « B » en bas à droite. La carte n° 1 de chaque faction (Treaty of Westphalia) est classée à part dans la galerie, sous « Westphalie ».
 
-Les paquets B sont donc : cartes 20 à 27 pour les Impériaux et la Ligue catholique, cartes 19 à 27 pour la France et la Suède. France et Suède ont ainsi 9 cartes B chacune, contre 8 pour les Impériaux et 7 pour la Ligue (à cause de la carte n° 25 manquante). La galerie suit ce classement.
+| Faction | Paquet A (avec Westphalie) | Paquet B |
+|---|---|---|
+| Impériaux | 1 à 19 (19 cartes) | 20 à 27 (8 cartes) |
+| Ligue catholique | 1 à 19 (19 cartes) | 20 à 27 (8 cartes) |
+| France | 1 à 18 (18 cartes) | 19 à 27 (9 cartes) |
+| Suède | 1 à 18 (18 cartes) | 19 à 27 (9 cartes) |
+
+C'est voulu : la France et la Suède ont une carte A de moins et une carte B de plus que les factions catholiques.
+
+France n° 22 (*Louis, The Great Condé*) n'a pas de losange B imprimé, mais c'est bien une carte B.
 
 Le module VASSAL place correctement France n° 19 (*Annus Horribilis*) et Suède n° 19 (*Swedish Training*) dans les paquets B. Seule une étiquette interne de ces deux cartes indique encore « A » (prototype `def_Card_France_A` / `def_Card_Sweden_A`, propriété `Home_Deck`). Elle n'a aucun effet en jeu : les prototypes A et B font la même chose (défausser la carte).
+
+## Carte manquante : Ligue catholique n° 25
+
+Le module ne contient pas de carte Ligue catholique n° 25. Cette carte est une copie exacte d'*Inexperienced Troops* (n° 23) : même texte, mêmes valeurs (3/3), paquet B. La galerie l'ajoute en réutilisant l'image de la n° 23, avec l'étiquette « Reconstituée ».
 
 ## Régénérer la page
 

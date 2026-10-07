@@ -339,7 +339,8 @@ function metaHTML(c) {
   const deck = c.f === 'tr' ? 'Troubles ' + c.d : DECKS[c.d];
   return `<span class="tag"><i class="dot" style="background:${facColor(c.f)}"></i>${FAC[c.f].name} #${c.n}</span><span class="tag">${deck}</span>` +
     (c.k !== 'troubles' && c.k !== 'treaty' ? `<span class="tag">${KIND[c.k]}</span>` : '') +
-    (c.star ? '<span class="tag" title="Affecte les points de victoire de faction">★ PV de faction</span>' : '');
+    (c.star ? '<span class="tag" title="Affecte les points de victoire de faction">★ PV de faction</span>' : '') +
+    (c.note ? `<span class="tag" title="${esc(c.note)}">Reconstituée</span>` : '');
 }
 function render() {
   const { list, terms } = filtered();

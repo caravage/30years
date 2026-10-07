@@ -11,6 +11,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TOOLS = os.path.join(ROOT, 'tools')
 SRC_IMAGES = sys.argv[1] if len(sys.argv) > 1 else None
 
+# Cards missing from the module, rebuilt from an identical card (image is copied).
+NOTES = {'cl-25': 'Copie exacte de la n° 23, absente du module : image de la n° 23'}
+COPIES = {'cl-25': 'cl-23'}
+
 cards = []
 for f in ['cards_imp.txt', 'cards_cl.txt', 'cards_fra.txt', 'cards_swe.txt', 'cards_tr.txt']:
     for line in open(os.path.join(TOOLS, f), encoding='utf-8'):
@@ -34,12 +38,15 @@ for f in ['cards_imp.txt', 'cards_cl.txt', 'cards_fra.txt', 'cards_swe.txt', 'ca
             else: kind = 'special'
             if n == 1: kind = 'treaty'
         slug = f'{fac}-{n:02d}'
-        if SRC_IMAGES:
+        if slug in COPIES:
+            import shutil
+            shutil.copyfile(os.path.join(ROOT, 'cards', COPIES[slug] + '.webp'), os.path.join(ROOT, 'cards', slug + '.webp'))
+        elif SRC_IMAGES:
             from PIL import Image
             Image.open(os.path.join(SRC_IMAGES, img)).convert('RGB').save(
                 os.path.join(ROOT, 'cards', f'{slug}.webp'), 'WEBP', quality=82, method=6)
         cards.append(dict(id=slug, f=fac, n=n, t=title, h=int(horse) if horse else None, b=int(boot) if boot else None,
-                          d=deck, k=kind, w=timing, x=text, fl=flavor, star=title.endswith('*')))
+                          d=deck, k=kind, w=timing, x=text, fl=flavor, star=title.endswith('*'), note=NOTES.get(slug)))
 
 tpl = open(os.path.join(TOOLS, 'template.html'), encoding='utf-8').read()
 with open(os.path.join(ROOT, 'index.html'), 'w', encoding='utf-8') as out:
