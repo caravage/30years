@@ -1,0 +1,431 @@
+<title>Thirty Years of Misery Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,700;1,500;1,700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<style>
+/* Layout: sticky filter bar over a dense grid of real card scans; a viewer sheet pairs the scan with its transcription. */
+:root {
+  --bg: #e4e6e8;
+  --surface: #f3f4f5;
+  --raised: #ffffff;
+  --fg: #1c222b;
+  --muted: #5d6672;
+  --line: #c8cdd3;
+  --accent: #7d6220;
+  --accent-ink: #ffffff;
+  --mark: #f2d77a;
+  --shadow: 0 1px 2px rgb(20 26 34 / .12), 0 6px 18px rgb(20 26 34 / .10);
+  --imp: #a23a3f; --cl: #2b74a3; --fra: #2a8580; --swe: #b9871a; --tr: #5a626e;
+  --u-g: #2a2d31; --u-i: #a3424b; --u-cl: #1f5d78; --u-sp: #6c5aa0; --u-sw: #f2e3a0; --u-sw-ink: #3b3218; --u-f: #ffffff; --u-f-ink: #33404d; --u-s: #b06a35;
+  --horse: #3f6f9c; --boot: #4f7a4f;
+  --display: "Alegreya", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --body: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12161c; --surface: #1a2028; --raised: #222a34; --fg: #e6e3dc; --muted: #9aa3ae; --line: #313a46;
+    --accent: #d1ad55; --accent-ink: #1a1408; --mark: #7a6420;
+    --shadow: 0 1px 2px rgb(0 0 0 / .4), 0 8px 24px rgb(0 0 0 / .35);
+    --imp: #d4646a; --cl: #5ba7d6; --fra: #4fb8b0; --swe: #e0b23f; --tr: #8e97a3;
+    --u-f-ink: #33404d; --horse: #6d9fcc; --boot: #7fae7f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12161c; --surface: #1a2028; --raised: #222a34; --fg: #e6e3dc; --muted: #9aa3ae; --line: #313a46;
+  --accent: #d1ad55; --accent-ink: #1a1408; --mark: #7a6420;
+  --shadow: 0 1px 2px rgb(0 0 0 / .4), 0 8px 24px rgb(0 0 0 / .35);
+  --imp: #d4646a; --cl: #5ba7d6; --fra: #4fb8b0; --swe: #e0b23f; --tr: #8e97a3;
+  --u-f-ink: #33404d; --horse: #6d9fcc; --boot: #7fae7f;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 16px/1.5 var(--body); }
+.wrap { max-width: 1320px; margin: 0 auto; padding-inline: 20px; }
+header.top { padding-block: 28px 18px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
+header.top h1 { font: italic 700 clamp(1.9rem, 4.5vw, 2.8rem)/1.05 var(--display); margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+header.top .sub { color: var(--muted); font-size: .95rem; margin-top: 6px; }
+.decks { display: flex; gap: 6px; flex-wrap: wrap; }
+.decks span { font-size: .8rem; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border: 1px solid var(--line); border-radius: 99px; font-variant-numeric: tabular-nums; }
+.decks i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.bar .wrap { padding-block: 12px; display: grid; gap: 10px; }
+.row1 { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.search { flex: 1 1 280px; position: relative; min-width: 0; }
+.search input { width: 100%; font: inherit; font-size: 1rem; padding: 10px 38px 10px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--raised); color: var(--fg); }
+.search input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.search kbd { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font: 500 .75rem var(--body); color: var(--muted); border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; }
+.ctl { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.ctl label { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+select { font: inherit; padding: 9px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--raised); color: var(--fg); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--raised); }
+.seg button { font: inherit; font-size: .9rem; border: 0; background: transparent; color: var(--muted); padding: 9px 12px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.chips { display: flex; gap: 6px 14px; flex-wrap: wrap; align-items: center; }
+.group { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.group > b { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 500; margin-right: 2px; }
+.chip { font: inherit; font-size: .88rem; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; }
+.chip i { width: 9px; height: 9px; border-radius: 50%; }
+.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.chip .ct { font-size: .75rem; opacity: .65; font-variant-numeric: tabular-nums; }
+.reset { font: inherit; font-size: .85rem; background: none; border: 0; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; padding: 4px; }
+.status { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-block: 16px 10px; color: var(--muted); font-size: .9rem; flex-wrap: wrap; }
+.status strong { color: var(--fg); font-variant-numeric: tabular-nums; }
+
+/* Grid of scans */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: 18px 16px; padding-bottom: 48px; }
+.card { all: unset; cursor: pointer; display: grid; gap: 7px; min-width: 0; }
+.card .img { aspect-ratio: 384 / 538; border-radius: 9px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow); transition: transform .18s ease, box-shadow .18s ease; max-width: 100%; }
+.card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card:hover .img, .card:focus-visible .img { transform: translateY(-3px); }
+.card:focus-visible .img { outline: 3px solid var(--accent); outline-offset: 3px; }
+.card .cap { display: flex; gap: 8px; align-items: baseline; font-size: .85rem; min-width: 0; }
+.card .cap .fn { color: var(--muted); font-variant-numeric: tabular-nums; flex: none; }
+.card .cap .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: none; align-self: center; }
+
+/* Text list */
+.list { display: grid; gap: 10px; padding-bottom: 48px; }
+.item { display: grid; grid-template-columns: 92px 1fr; gap: 16px; padding: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; cursor: pointer; text-align: left; font: inherit; color: inherit; }
+.item:hover { border-color: var(--muted); }
+.item img { width: 92px; border-radius: 6px; display: block; aspect-ratio: 384/538; max-width: 100%; }
+.item .body { min-width: 0; display: grid; gap: 6px; align-content: start; }
+.item h3 { margin: 0; font: italic 700 1.25rem/1.2 var(--display); }
+.meta { display: flex; gap: 6px 10px; flex-wrap: wrap; align-items: center; font-size: .8rem; color: var(--muted); }
+.tag { display: inline-flex; align-items: center; gap: 5px; padding: 1px 8px; border-radius: 99px; border: 1px solid var(--line); font-size: .78rem; color: var(--fg); background: var(--raised); }
+.when { font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.fx { margin: 0; }
+.fx strong { font-weight: 700; }
+.flav { margin: 0; font-family: var(--display); font-style: italic; color: var(--muted); }
+mark { background: var(--mark); color: inherit; border-radius: 3px; padding: 0 1px; }
+
+/* Inline game symbols */
+.u { display: inline-block; font: 700 .72em/1 var(--body); padding: .28em .38em; border-radius: 3px; vertical-align: .08em; min-width: 1.6em; text-align: center; letter-spacing: 0; }
+.u-G { background: var(--u-g); color: #fff; }
+.u-I { background: var(--u-i); color: #fff; }
+.u-CL { background: var(--u-cl); color: #fff; font-style: italic; }
+.u-Sp { background: var(--u-sp); color: #fff; font-style: italic; }
+.u-Sw { background: var(--u-sw); color: var(--u-sw-ink); font-style: italic; }
+.u-F { background: var(--u-f); color: var(--u-f-ink); box-shadow: inset 0 0 0 1px var(--u-f-ink); font-style: italic; }
+.u-S { background: var(--u-s); color: #fff; }
+.fac { font-weight: 700; white-space: nowrap; }
+.fac-imp { color: var(--imp); } .fac-cl { color: var(--cl); } .fac-fra { color: var(--fra); } .fac-swe { color: var(--swe); }
+.stat { display: inline-flex; align-items: center; gap: 3px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.stat svg { width: 1.05em; height: 1.05em; }
+.st-h { color: var(--horse); } .st-b { color: var(--boot); }
+.sym { display: inline-flex; vertical-align: -.15em; }
+.sym svg { width: 1em; height: 1em; }
+.bdg { display: inline-grid; place-items: center; width: 1.2em; height: 1.2em; transform: rotate(45deg); background: var(--muted); border-radius: 2px; vertical-align: -.1em; }
+.bdg span { transform: rotate(-45deg); color: var(--bg); font: 700 .7em var(--body); }
+
+/* Viewer */
+dialog { border: 0; padding: 0; background: var(--surface); color: var(--fg); border-radius: 16px; width: min(980px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); box-shadow: 0 30px 80px rgb(0 0 0 / .45); }
+dialog::backdrop { background: rgb(8 10 14 / .72); }
+.viewer { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 28px; padding: 24px; }
+.viewer .big { max-width: 100%; aspect-ratio: 384/538; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); align-self: start; }
+.viewer .big img { width: 100%; height: 100%; display: block; }
+.viewer .info { display: grid; gap: 14px; align-content: start; min-width: 0; }
+.viewer h2 { margin: 0; font: italic 700 clamp(1.6rem, 3vw, 2.2rem)/1.1 var(--display); text-wrap: balance; }
+.viewer .fx { font-size: 1.08rem; }
+.viewer .when { font-size: .85rem; }
+.viewer .stats { display: flex; gap: 14px; font-size: 1.15rem; }
+.viewer .nav { display: flex; gap: 8px; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); padding-top: 14px; margin-top: 4px; }
+.btn { font: inherit; font-size: .9rem; padding: 8px 14px; border-radius: 9px; border: 1px solid var(--line); background: var(--raised); color: var(--fg); cursor: pointer; }
+.btn:hover { border-color: var(--muted); }
+.close { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; border-radius: 50%; padding: 0; font-size: 1.3rem; line-height: 1; }
+.pos { color: var(--muted); font-size: .85rem; font-variant-numeric: tabular-nums; }
+.empty { padding: 60px 0; text-align: center; color: var(--muted); }
+.empty p { margin: 0 0 10px; font-family: var(--display); font-style: italic; font-size: 1.3rem; color: var(--fg); }
+footer { color: var(--muted); font-size: .82rem; padding-block: 0 40px; }
+
+@media (max-width: 720px) {
+  .viewer { grid-template-columns: 1fr; padding: 16px; gap: 16px; }
+  .viewer .big { width: min(300px, 100%); justify-self: center; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px 12px; }
+  .wrap { padding-inline: 16px; }
+  .item { grid-template-columns: 64px 1fr; gap: 12px; }
+  .item img { width: 64px; }
+}
+@media (prefers-reduced-motion: reduce) { .card .img { transition: none; } .card:hover .img { transform: none; } }
+</style>
+
+<header class="wrap top">
+  <div>
+    <h1>Thirty Years of Misery</h1>
+    <div class="sub">Galerie des cartes du module VASSAL · Brian Asklev · VUCA Games 2026</div>
+  </div>
+  <div class="decks" id="deckSummary"></div>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="row1">
+      <div class="search">
+        <input id="q" type="search" placeholder="Chercher un mot : Wallenstein, ROUT, fortress, Saxony…" autocomplete="off" aria-label="Rechercher dans les cartes">
+        <kbd>/</kbd>
+      </div>
+      <div class="ctl">
+        <label for="sort">Tri</label>
+        <select id="sort">
+          <option value="faction">Faction puis numéro</option>
+          <option value="name">Nom (A → Z)</option>
+          <option value="horse">Cavalier (♞) décroissant</option>
+          <option value="boot">Botte décroissant</option>
+          <option value="total">Cavalier + botte décroissant</option>
+          <option value="number">Numéro de carte</option>
+        </select>
+        <div class="seg" role="group" aria-label="Affichage">
+          <button id="vGrid" aria-pressed="true">Cartes</button>
+          <button id="vList" aria-pressed="false">Texte</button>
+        </div>
+      </div>
+    </div>
+    <div class="chips">
+      <div class="group" id="gFac"><b>Faction</b></div>
+      <div class="group" id="gDeck"><b>Paquet</b></div>
+      <div class="group" id="gKind"><b>Quand</b></div>
+      <button class="reset" id="reset" hidden>Tout effacer</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="status"><span id="count"></span><span id="hint">Cliquer une carte pour l’agrandir · ← → pour naviguer</span></div>
+  <div id="out"></div>
+</main>
+<footer class="wrap">Textes transcrits depuis les images du module « Thirty Years of Misery V1 ». La carte n° 25 de la Ligue catholique n’existe pas dans le module. Les cartes marquées * modifient les points de victoire de faction.</footer>
+
+<dialog id="dlg" aria-label="Carte">
+  <button class="btn close" id="dClose" aria-label="Fermer">×</button>
+  <div class="viewer">
+    <div class="big"><img id="dImg" alt=""></div>
+    <div class="info">
+      <div class="meta" id="dMeta"></div>
+      <h2 id="dTitle"></h2>
+      <div class="stats" id="dStats"></div>
+      <div class="when" id="dWhen"></div>
+      <p class="fx" id="dFx"></p>
+      <p class="flav" id="dFl"></p>
+      <div class="nav">
+        <button class="btn" id="dPrev">← Précédente</button>
+        <span class="pos" id="dPos"></span>
+        <button class="btn" id="dNext">Suivante →</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+const CARDS = /*DATA*/[];
+const FAC = {
+  imp: { name: 'Impériaux', en: 'Imperial', order: 0 },
+  cl:  { name: 'Ligue catholique', en: 'Catholic League', order: 1 },
+  fra: { name: 'France', en: 'French', order: 2 },
+  swe: { name: 'Suède', en: 'Swedish', order: 3 },
+  tr:  { name: 'Troubles allemands', en: 'German Troubles', order: 4 },
+};
+const DECKS = { W: 'Traité de Westphalie', A: 'Paquet A', B: 'Paquet B' };
+const KIND = {
+  turn: 'Début de tour', battle: 'Bataille', religion: 'Phase religieuse', round: 'Début/fin de round', treaty: 'Traité', special: 'Autre moment', troubles: 'Troubles',
+};
+const UNIT = { G: 'German protestant', I: 'Imperial', CL: 'Catholic League', Sp: 'Spanish', Sw: 'Swedish', F: 'French', S: 'Saxon' };
+const ICON = {
+  horse: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 22H6c0-3 1.4-5 3.6-6.4L8 13.5c-.9.4-2 .3-2.7-.4-.7-.8-.6-2 .2-2.7L10.6 6c.3-1.6 1.5-3.2 3.1-4l.6 2c3.3.6 5.7 3.6 5.7 7.6z"/></svg>',
+  boot: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h7v10.5l4.6 2.1c1.5.7 2.4 2.1 2.4 3.7V20H4v-3l3-1.6z"/></svg>',
+  church: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11 2h2v3h2v2h-2v2.2l5 3.3V22h-5v-4a1 1 0 0 0-2 0v4H6v-9.5l5-3.3V7H9V5h2z"/></svg>',
+  cross: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10.5 2h3v6h5v3h-5v11h-3V11h-5V8h5z"/></svg>',
+};
+const SYM = {
+  imp: '<span class="fac fac-imp">Imperial</span>', cl: '<span class="fac fac-cl">Catholic League</span>',
+  fra: '<span class="fac fac-fra">French</span>', swe: '<span class="fac fac-swe">Swedish</span>',
+  rw: '<span class="fac">Religious War</span>',
+  rel: '<span class="sym" title="Phase religieuse">' + ICON.cross + '</span>',
+  church: '<span class="sym" title="Principauté">' + ICON.church + '</span>',
+  horse: '<span class="stat st-h" title="Cavalier">' + ICON.horse + '</span>',
+  boot: '<span class="stat st-b" title="Botte">' + ICON.boot + '</span>',
+  B: '<span class="bdg" title="Cartes B"><span>B</span></span>',
+};
+const SYM_TXT = { imp: 'Imperial', cl: 'Catholic League', fra: 'French France', swe: 'Swedish Sweden', rw: 'Religious War', rel: 'religion religious phase', church: 'principality church', horse: 'horse', boot: 'boot', B: 'B' };
+
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const fold = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const plain = s => s.replace(/\[(\w+)\]/g, (_, u) => u + ' ' + (UNIT[u] || '')).replace(/\{(\w+)\}/g, (_, k) => SYM_TXT[k] || k).replace(/\*\*/g, '');
+
+for (const c of CARDS) {
+  c.hay = fold([c.t, plain(c.w), plain(c.x), c.fl, FAC[c.f].name, FAC[c.f].en, '#' + c.n].join(' '));
+}
+
+// Render card text: escape, highlight search words in plain text runs, then swap in symbols.
+function rich(s, terms) {
+  const parts = s.split(/(\[\w+\]|\{\w+\})/);
+  let html = parts.map(p => {
+    let m;
+    if ((m = p.match(/^\[(\w+)\]$/))) return `<span class="u u-${m[1]}" title="${UNIT[m[1]] || m[1]}">${m[1]}</span>`;
+    if ((m = p.match(/^\{(\w+)\}$/))) return SYM[m[1]] || p;
+    return hl(esc(p), terms);
+  }).join('');
+  return html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+}
+function hl(html, terms) {
+  if (!terms.length) return html;
+  // Map folded positions back to original characters (fold keeps one char per base char for Latin text).
+  const base = html.normalize('NFC');
+  const f = fold(base);
+  if (f.length !== base.length) return html;
+  const marks = new Array(base.length).fill(false);
+  for (const t of terms) {
+    let i = 0;
+    while ((i = f.indexOf(t, i)) !== -1) { for (let k = i; k < i + t.length; k++) marks[k] = true; i += t.length; }
+  }
+  let out = '', open = false, inTag = false;
+  for (let i = 0; i < base.length; i++) {
+    const ch = base[i];
+    if (ch === '&' ) { inTag = true; }
+    const m = marks[i] && !inTag;
+    if (m && !open) { out += '<mark>'; open = true; }
+    if (!m && open) { out += '</mark>'; open = false; }
+    out += ch;
+    if (inTag && ch === ';') inTag = false;
+  }
+  return out + (open ? '</mark>' : '');
+}
+
+const state = { q: '', fac: new Set(), deck: new Set(), kind: new Set(), sort: 'faction', view: 'grid' };
+try {
+  const saved = JSON.parse(localStorage.getItem('tym-view') || 'null');
+  if (saved && saved.view) state.view = saved.view;
+  if (saved && saved.sort) state.sort = saved.sort;
+} catch (e) {}
+
+function chip(group, key, label, color, count) {
+  const b = document.createElement('button');
+  b.className = 'chip'; b.type = 'button'; b.setAttribute('aria-pressed', 'false'); b.dataset.key = key;
+  b.innerHTML = (color ? `<i style="background:${color}"></i>` : '') + label + ` <span class="ct">${count}</span>`;
+  b.onclick = () => { const s = state[group]; s.has(key) ? s.delete(key) : s.add(key); b.setAttribute('aria-pressed', s.has(key)); render(); };
+  return b;
+}
+const count = (pred) => CARDS.filter(pred).length;
+const facColor = f => `var(--${f})`;
+for (const f of Object.keys(FAC)) document.getElementById('gFac').append(chip('fac', f, FAC[f].name, facColor(f), count(c => c.f === f)));
+for (const d of ['W', 'A', 'B']) document.getElementById('gDeck').append(chip('deck', d, d === 'W' ? 'Westphalie' : d, null, count(c => c.f !== 'tr' && c.d === d)));
+for (const d of ['tA', 'tB', 'tC', 'tD']) document.getElementById('gDeck').append(chip('deck', d, 'Troubles ' + d[1], null, count(c => c.f === 'tr' && c.d === d[1])));
+for (const k of ['turn', 'battle', 'religion', 'round', 'special', 'treaty']) document.getElementById('gKind').append(chip('kind', k, KIND[k], null, count(c => c.k === k)));
+document.getElementById('deckSummary').innerHTML = Object.keys(FAC).map(f => `<span><i style="background:${facColor(f)}"></i>${FAC[f].name} ${count(c => c.f === f)}</span>`).join('');
+
+const deckKey = c => c.f === 'tr' ? 't' + c.d : c.d;
+let current = [];
+function filtered() {
+  const terms = fold(state.q).split(/\s+/).filter(Boolean);
+  let list = CARDS.filter(c =>
+    (!state.fac.size || state.fac.has(c.f)) &&
+    (!state.deck.size || state.deck.has(deckKey(c))) &&
+    (!state.kind.size || state.kind.has(c.k)) &&
+    terms.every(t => c.hay.includes(t)));
+  const byFac = (a, b) => FAC[a.f].order - FAC[b.f].order || a.n - b.n;
+  const cmp = {
+    faction: byFac,
+    name: (a, b) => a.t.localeCompare(b.t, 'en') || byFac(a, b),
+    horse: (a, b) => (b.h ?? -1) - (a.h ?? -1) || byFac(a, b),
+    boot: (a, b) => (b.b ?? -1) - (a.b ?? -1) || byFac(a, b),
+    total: (a, b) => ((b.h ?? -1) + (b.b ?? -1)) - ((a.h ?? -1) + (a.b ?? -1)) || byFac(a, b),
+    number: (a, b) => a.n - b.n || byFac(a, b),
+  }[state.sort];
+  return { list: list.sort(cmp), terms };
+}
+function stats(c) {
+  if (c.h == null) return '';
+  return `<span class="stat st-h" title="Cavalier">${ICON.horse}${c.h}</span><span class="stat st-b" title="Botte">${ICON.boot}${c.b}</span>`;
+}
+function metaHTML(c) {
+  const deck = c.f === 'tr' ? 'Troubles ' + c.d : DECKS[c.d];
+  return `<span class="tag"><i class="dot" style="background:${facColor(c.f)}"></i>${FAC[c.f].name} #${c.n}</span><span class="tag">${deck}</span>` +
+    (c.k !== 'troubles' && c.k !== 'treaty' ? `<span class="tag">${KIND[c.k]}</span>` : '') +
+    (c.star ? '<span class="tag" title="Affecte les points de victoire de faction">★ PV de faction</span>' : '');
+}
+function render() {
+  const { list, terms } = filtered();
+  current = list;
+  const active = state.q || state.fac.size || state.deck.size || state.kind.size;
+  document.getElementById('reset').hidden = !active;
+  document.getElementById('count').innerHTML = `<strong>${list.length}</strong> carte${list.length > 1 ? 's' : ''} sur ${CARDS.length}`;
+  const out = document.getElementById('out');
+  if (!list.length) {
+    out.innerHTML = `<div class="empty"><p>Aucune carte ne correspond.</p>Essayez un autre mot ou retirez des filtres.</div>`;
+    return;
+  }
+  if (state.view === 'grid') {
+    out.className = 'grid';
+    out.innerHTML = list.map((c, i) => `<button class="card" data-i="${i}" aria-label="${esc(c.t)}">
+      <div class="img"><img src="cards/${c.id}.webp" alt="" loading="lazy" width="384" height="538"></div>
+      <div class="cap"><i class="dot" style="background:${facColor(c.f)}"></i><span class="fn">${c.n}</span><span class="nm">${hl(esc(c.t), terms)}</span></div>
+    </button>`).join('');
+  } else {
+    out.className = 'list';
+    out.innerHTML = list.map((c, i) => `<button class="item" data-i="${i}">
+      <img src="cards/${c.id}.webp" alt="" loading="lazy" width="92" height="129">
+      <div class="body">
+        <div class="meta">${metaHTML(c)} ${stats(c)}</div>
+        <h3>${hl(esc(c.t), terms)}</h3>
+        ${c.w ? `<div class="when">${rich(c.w, terms)}</div>` : ''}
+        <p class="fx">${rich(c.x, terms)}</p>
+        <p class="flav">${hl(esc(c.fl), terms)}</p>
+      </div>
+    </button>`).join('');
+  }
+}
+
+// Viewer
+const dlg = document.getElementById('dlg');
+let at = 0;
+function show(i) {
+  at = (i + current.length) % current.length;
+  const c = current[at], terms = fold(state.q).split(/\s+/).filter(Boolean);
+  document.getElementById('dImg').src = `cards/${c.id}.webp`;
+  document.getElementById('dImg').alt = c.t;
+  document.getElementById('dMeta').innerHTML = metaHTML(c);
+  document.getElementById('dTitle').innerHTML = hl(esc(c.t), terms);
+  document.getElementById('dStats').innerHTML = stats(c);
+  document.getElementById('dWhen').innerHTML = c.w ? rich(c.w, terms) : '';
+  document.getElementById('dFx').innerHTML = rich(c.x, terms);
+  document.getElementById('dFl').innerHTML = hl(esc(c.fl), terms);
+  document.getElementById('dPos').textContent = `${at + 1} / ${current.length}`;
+  if (!dlg.open) dlg.showModal();
+}
+document.getElementById('out').addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (b) show(+b.dataset.i); });
+document.getElementById('dPrev').onclick = () => show(at - 1);
+document.getElementById('dNext').onclick = () => show(at + 1);
+document.getElementById('dClose').onclick = () => dlg.close();
+dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+document.addEventListener('keydown', e => {
+  if (dlg.open) {
+    if (e.key === 'ArrowLeft') show(at - 1);
+    if (e.key === 'ArrowRight') show(at + 1);
+    return;
+  }
+  if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+});
+
+// Controls
+const q = document.getElementById('q');
+let t;
+q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { state.q = q.value.trim(); render(); }, 80); });
+const sortSel = document.getElementById('sort');
+sortSel.value = state.sort;
+sortSel.onchange = () => { state.sort = sortSel.value; save(); render(); };
+function setView(v) {
+  state.view = v;
+  document.getElementById('vGrid').setAttribute('aria-pressed', v === 'grid');
+  document.getElementById('vList').setAttribute('aria-pressed', v === 'list');
+  save(); render();
+}
+function save() { try { localStorage.setItem('tym-view', JSON.stringify({ view: state.view, sort: state.sort })); } catch (e) {} }
+document.getElementById('vGrid').onclick = () => setView('grid');
+document.getElementById('vList').onclick = () => setView('list');
+document.getElementById('reset').onclick = () => {
+  state.q = ''; q.value = ''; state.fac.clear(); state.deck.clear(); state.kind.clear();
+  document.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed', 'false'));
+  render();
+};
+setView(state.view);
+</script>
